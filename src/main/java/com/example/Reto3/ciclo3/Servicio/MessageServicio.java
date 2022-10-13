@@ -28,7 +28,7 @@ public class MessageServicio {
             return messageRepository.save(message);
         } else {
             Optional<Message> e = messageRepository.getMessage (message.getIdMessage());
-            if (e.isEmpty()) {
+            if (!e.isPresent()) {
                 return messageRepository.save(message);
             } else {
                 return message;
@@ -39,7 +39,7 @@ public class MessageServicio {
     public Message update(Message message) {
         if (message.getIdMessage() != null) {
             Optional<Message> e = messageRepository.getMessage(message.getIdMessage());
-            if (!e.isEmpty()) {
+            if (e.isPresent()) {
                 if (message.getMessageText() != null) {
                     e.get().setMessageText(message.getMessageText());
                 }
